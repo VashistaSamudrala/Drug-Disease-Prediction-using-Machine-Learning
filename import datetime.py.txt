@@ -1,0 +1,53 @@
+import datetime
+class ToDoItem:
+    def __init__(self, task, due_date):
+        self.task = task
+        self.due_date = due_date
+        self.completed = False
+
+    def __str__(self):
+        return f"{self.task} - {self.due_date}"
+
+
+def create_todo_list():
+    todo_list = []
+    return todo_list
+
+
+def add_todo_item(todo_list, task, due_date):
+    todo_item = ToDoItem(task, due_date)
+    todo_list.append(todo_item)
+
+
+def get_todo_items_due_today(todo_list):
+    todo_items_due_today = []
+    for todo_item in todo_list:
+        if todo_item.due_date == datetime.date.today():
+            todo_items_due_today.append(todo_item)
+    return todo_items_due_today
+
+
+def mark_todo_item_as_completed(todo_list, todo_item):
+    todo_item.completed = True
+
+
+def print_todo_list(todo_list):
+    for todo_item in todo_list:
+        print(todo_item)
+
+
+def main():
+    todo_list = create_todo_list()
+    add_todo_item(todo_list, "Buy groceries", datetime.date(2023, 7, 18))
+    add_todo_item(todo_list, "Call the doctor", datetime.date(2023, 7, 19))
+    print_todo_list(todo_list)
+    todo_items_due_today = get_todo_items_due_today(todo_list)
+    print("Todo items due today:")
+    print_todo_list(todo_items_due_today)
+    mark_todo_item_as_completed(todo_list, todo_items_due_today[0])
+    print("Todo items due today after marking one as completed:")
+    print_todo_list(todo_items_due_today)
+
+
+if __name__ == "__main__":
+    main()

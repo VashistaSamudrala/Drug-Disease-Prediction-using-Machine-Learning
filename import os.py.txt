@@ -1,0 +1,48 @@
+
+
+def save_tasks(file_name, tasks):
+    with open(file_name, "w") as file:
+        for task in tasks:
+            file.write(task + "\n")
+
+def load_tasks(file_name):
+    tasks = []
+    if os.path.exists(file_name):
+        with open(file_name, "r") as file:
+            tasks = file.readlines()
+    return tasks
+
+def main():
+    file_name = "todo.txt"
+    tasks = load_tasks(file_name)
+
+    while True:
+        print("\nMenu:")
+        print("1. View tasks")
+        print("2. Add a task")
+        print("3. Update a task")
+        print("4. Remove a task")
+        print("5. Save and exit")
+        choice = input("Enter your choice (1/2/3/4/5): ")
+
+        if choice == "1":
+            display_tasks(tasks)
+        elif choice == "2":
+            task = input("Enter the task to add: ")
+            add_task(tasks, task)
+        elif choice == "3":
+            index = int(input("Enter the task index to update: "))
+            updated_task = input("Enter the updated task: ")
+            update_task(tasks, index, updated_task)
+        elif choice == "4":
+            index = int(input("Enter the task index to remove: "))
+            remove_task(tasks, index)
+        elif choice == "5":
+            save_tasks(file_name, tasks)
+            print("Tasks saved. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
